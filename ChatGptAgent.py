@@ -9,7 +9,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool
 
 # Set environment variables
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = 'Your secret token'
 
 # Connect to database
 DB_USER = 'root'
@@ -53,7 +53,6 @@ class GPTAgent:
 
        execute_query = QuerySQLDataBaseTool(db=self.db)
        write_query = create_sql_query_chain(self.llm, self.db)
-    #    chain = write_query | execute_query
 
        answer = self.answer_prompt | self.llm | StrOutputParser()
 

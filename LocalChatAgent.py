@@ -1,11 +1,7 @@
 import os
 from operator import itemgetter
 from langchain.sql_database import SQLDatabase
-from langchain_experimental.sql import SQLDatabaseChain
 from langchain.chains import create_sql_query_chain
-from langchain.llms.llamacpp import LlamaCpp
-from langchain.callbacks.manager import CallbackManager
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -14,9 +10,6 @@ from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool
 
 # from openai import OpenAI
 from langchain_openai import OpenAI
-
-# Set environment variables
-# os.environ['OPENAI_API_KEY'] = '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'
 
 # AI setting
 MODEL_PATH = "http://localhost:1234/v1"
@@ -29,8 +22,6 @@ Question: {question}
 SQL Query: {query}
 SQL Result: {result}
 Answer: """
-N_GPU_LAYERS = 40  # Change this value based on your model and your GPU VRAM pool.
-N_BATCH = 512  # Should be between 1 and n_ctx, consider the amount of VRAM in your GPU.
 
 
 # Connect to database
@@ -56,8 +47,6 @@ class LocalChatAgent:
        '''Create a connection to OpenAI model'''
        print('Connecting to OpenAI!')
        
-      #  callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
-
        return OpenAI(base_url=MODEL_PATH, api_key="not-needed")
 
     def answer(self, question):
@@ -66,7 +55,6 @@ class LocalChatAgent:
 
        execute_query = QuerySQLDataBaseTool(db=self.db)
        write_query = create_sql_query_chain(self.llm, self.db)
-    #    chain = write_query | execute_query
 
        answer = self.answer_prompt | self.llm | StrOutputParser()
 
@@ -76,8 +64,3 @@ class LocalChatAgent:
        
        
        return chain.invoke({"question": self.current_question})
-       
-      #  chain = SQLDatabaseChain.from_llm(self.llm, self.db, prompt=self.answer_prompt)
-      #  return chain.invoke({"question": self.current_question})
-       
-
