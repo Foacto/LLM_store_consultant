@@ -10,7 +10,7 @@ Python 3.10.10
 
 # Install enviroment (Once)
 
-pip install requirements.txt
+pip install -r requirements.txt
 
 # Run code
 
