@@ -28,7 +28,7 @@ Answer: """
 DB_USER = 'root'
 DB_PASSWORD = '27012001'
 DB_HOST = 'localhost'
-DB_PORT = '3306'
+DB_PORT = '3307'
 DB_NAME = 'db_demo_market'
 
 class LocalChatAgent:

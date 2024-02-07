@@ -10,7 +10,7 @@ services:
       MYSQL_PASSWORD: '${DB_PASSWORD}'
       MYSQL_ROOT_PASSWORD: 'admin'
     ports:
-      - '3306:3306'
+      - '3307:3307'
     volumes:
       - mysql:/data/mysql
     env_file:
