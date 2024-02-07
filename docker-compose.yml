@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    container_name: backend-mysql
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: 'admin'
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql:/data/mysql
+    env_file:
+      - .env
+
+volumes:
+  mysql:
+    driver: local
+  redis:
+    driver: local
