@@ -1,14 +1,13 @@
 version: '3'
 services:
   db:
-    container_name: backend-mysql
+    container_name: be-mysql
     image: mysql
     restart: always
     environment:
       MYSQL_DATABASE: '${DB_DATABASE}'
-      MYSQL_USER: '${DB_USERNAME}'
       MYSQL_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_ROOT_PASSWORD: 'admin'
+      MYSQL_ROOT_PASSWORD: '27012001'
     ports:
       - '3307:3307'
     volumes:
